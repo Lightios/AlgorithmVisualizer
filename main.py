@@ -1,9 +1,7 @@
 import pygame as pg
 
 import sorts
-
-WIDTH = 800
-HEIGHT = 600
+from consts import *
 
 
 class Main:
@@ -16,6 +14,9 @@ class Main:
         self.FPS = 5
         self.clock = pg.time.Clock()
         self.clock.tick( self.FPS )
+
+        self.font = pg.font.Font('freesansbold.ttf', 32)
+        self.text = self.font.render( 'Swaps: 0', False, WHITE, BLACK )
 
         self.sorts = sorts.Sorts()
         self.mainloop()
@@ -39,11 +40,15 @@ class Main:
         # self.insertion_sort()
         self.sorts.selection_sort()
 
+        self.text = self.font.render( f'Swaps: {self.sorts.swaps_counter}', False, WHITE, BLACK )
+
     def display( self ):
         self.screen.fill( (0, 0, 0) )
 
         for index in range( len( self.sorts.numbers ) ):
             self.draw_rectangle( index )
+
+        self.screen.blit( self.text, self.text.get_rect() )
 
         pg.display.flip()
         self.clock.tick_busy_loop( self.FPS )

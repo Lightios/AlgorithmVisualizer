@@ -7,10 +7,14 @@ class Sorts:
         self.i = 0
         self.j = 0
 
+        self.swaps_counter = 0
+
     def swap(self, a: int, b: int):
         temp = self.numbers[a]
         self.numbers[a] = self.numbers[b]
         self.numbers[b] = temp
+
+        self.swaps_counter += 1
 
     def bubble_sort(self):
         if self.i < len(self.numbers):
@@ -43,6 +47,6 @@ class Sorts:
                 if self.numbers[min_idx] > self.numbers[j]:
                     min_idx = j
 
-            self.numbers[self.i], self.numbers[min_idx] = self.numbers[min_idx], self.numbers[self.i]
+            self.swap( self.i, min_idx )
 
             self.i += 1
